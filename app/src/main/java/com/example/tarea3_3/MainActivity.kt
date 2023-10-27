@@ -49,6 +49,7 @@ class MainActivity : ComponentActivity() {
 var partidas = 5
 var j1 = 0
 var mensaje = ""
+var maquina = Random.nextInt(1,4)
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     val context= LocalContext.current
@@ -67,7 +68,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         Row (verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center){
             if (j1!= 0){
                 partidas--
-                
+                mostrarImagenes()
             }
         }
         Row (verticalAlignment = Alignment.Bottom, horizontalArrangement = Arrangement.SpaceEvenly){
@@ -92,9 +93,19 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         }
     }
 }
-
+@Composable
+fun mostrarImagenes() {
+    if (j1 == 1){
+        Image(painter = painterResource(id = R.drawable.piedra), contentDescription = "Elección 1")
+    }else if (j1 == 2){
+        Image(painter = painterResource(id = R.drawable.papel), contentDescription = "Elección 2")
+    }else
+        Image(painter = painterResource(id = R.drawable.piedra), contentDescription = "Elección 3")
+    if (maquina == 1){
+        Image(painter = painterResource(id = R.drawable.piedra), contentDescription = "Máquina 1")
+    }
+}
 fun Ganador(context : Context){
-    var maquina = Random.nextInt(1,4)
     Log.d("random", maquina.toString())
     if (j1.equals(maquina)){
         mensaje = "Empate"
